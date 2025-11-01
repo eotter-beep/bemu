@@ -4,7 +4,7 @@
 Tools
 -----
 
-This section of the manual documents QEMU's "tools": its
+This section of the manual documents BEMU (Byte Emu) "tools": its
 command line utilities and other standalone programs.
 
 .. toctree::
@@ -16,3 +16,4 @@ command line utilities and other standalone programs.
    qemu-pr-helper
    qemu-trace-stap
    qemu-vmsr-helper
+   gui-vm-manager

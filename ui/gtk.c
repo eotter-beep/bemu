@@ -2380,9 +2380,11 @@ static GtkWidget *gd_create_menu_view(GtkDisplayState *s, DisplayOptions *opts)
 
     gtk_accel_group_connect(s->accel_group, GDK_KEY_f, HOTKEY_MODIFIERS, 0,
             g_cclosure_new_swap(G_CALLBACK(gd_accel_full_screen), s, NULL));
+    gtk_accel_group_connect(s->accel_group, GDK_KEY_o, GDK_CONTROL_MASK, 0,
+            g_cclosure_new_swap(G_CALLBACK(gd_accel_full_screen), s, NULL));
     gtk_accel_label_set_accel(
             GTK_ACCEL_LABEL(gtk_bin_get_child(GTK_BIN(s->full_screen_item))),
-            GDK_KEY_f, HOTKEY_MODIFIERS);
+            GDK_KEY_o, GDK_CONTROL_MASK);
     gtk_menu_shell_append(GTK_MENU_SHELL(view_menu), s->full_screen_item);
 
     separator = gtk_separator_menu_item_new();
