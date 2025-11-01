@@ -381,6 +381,17 @@ static void handle_keydown(SDL_Event *ev)
 
     scon->gui_keysym = false;
 
+    if (!scon->ignore_hotkeys && !ev->key.repeat) {
+        SDL_Keymod mod = SDL_GetModState();
+        bool ctrl_down = (mod & KMOD_CTRL) != 0;
+        bool disallow = (mod & (KMOD_ALT | KMOD_GUI)) != 0;
+        if (ctrl_down && !disallow && ev->key.keysym.scancode == SDL_SCANCODE_O) {
+            toggle_full_screen(scon);
+            scon->gui_keysym = true;
+            return;
+        }
+    }
+
     if (!scon->ignore_hotkeys && gui_key_modifier_pressed && !ev->key.repeat) {
         switch (ev->key.keysym.scancode) {
         case SDL_SCANCODE_2:
