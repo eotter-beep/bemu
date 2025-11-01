@@ -87,7 +87,7 @@ static bool map_noreserve_effective(int fd, uint32_t qemu_map_flags)
 #if defined(__linux__)
     const bool readonly = qemu_map_flags & QEMU_MAP_READONLY;
     const bool shared = qemu_map_flags & QEMU_MAP_SHARED;
-    gchar *content = NULL;
+    g_autofree gchar *content = NULL;
     const char *endptr;
     unsigned int tmp;
 
