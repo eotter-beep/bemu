@@ -129,8 +129,11 @@ class VMManager(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
         self.title("BEMU VM Manager")
-        self.geometry("640x320")
-        self.resizable(False, False)
+        self.geometry("760x420")
+        self.minsize(640, 360)
+        self.resizable(True, True)
+        self.columnconfigure(0, weight=1)
+        self.rowconfigure(0, weight=1)
 
         self._vm_process: Optional[subprocess.Popen[str]] = None
         self._stop_event = threading.Event()
@@ -169,27 +172,27 @@ class VMManager(tk.Tk):
         ttk.Label(main_frame, text="Memory (MB)").grid(row=2, column=0, sticky=tk.W, **padding)
         self.memory_var = tk.IntVar(value=DEFAULT_MEMORY)
         ttk.Spinbox(main_frame, from_=256, to=262144, textvariable=self.memory_var, increment=256).grid(
-            row=2, column=1, sticky=tk.W, **padding
+            row=2, column=1, sticky=tk.EW, **padding
         )
 
         # CPUs
         ttk.Label(main_frame, text="vCPUs").grid(row=3, column=0, sticky=tk.W, **padding)
         self.cpus_var = tk.IntVar(value=DEFAULT_CPU_COUNT)
         ttk.Spinbox(main_frame, from_=1, to=os.cpu_count() or 16, textvariable=self.cpus_var).grid(
-            row=3, column=1, sticky=tk.W, **padding
+            row=3, column=1, sticky=tk.EW, **padding
         )
 
         # CPU model
         ttk.Label(main_frame, text="CPU Model").grid(row=4, column=0, sticky=tk.W, **padding)
         self.cpu_model_var = tk.StringVar(value=DEFAULT_CPU_NAME)
         ttk.Entry(main_frame, textvariable=self.cpu_model_var).grid(
-            row=4, column=1, sticky=tk.W, **padding
+            row=4, column=1, sticky=tk.EW, **padding
         )
 
         # Machine type
         ttk.Label(main_frame, text="Machine").grid(row=5, column=0, sticky=tk.W, **padding)
         self.machine_var = tk.StringVar(value=DEFAULT_MACHINE)
-        ttk.Entry(main_frame, textvariable=self.machine_var).grid(row=5, column=1, sticky=tk.W, **padding)
+        ttk.Entry(main_frame, textvariable=self.machine_var).grid(row=5, column=1, sticky=tk.EW, **padding)
 
         # BIOS path
         ttk.Label(main_frame, text="SeaBIOS Firmware").grid(row=6, column=0, sticky=tk.W, **padding)
@@ -240,15 +243,16 @@ class VMManager(tk.Tk):
 
         # Status label
         self.status_var = tk.StringVar(value="Ready")
-        ttk.Label(main_frame, textvariable=self.status_var).grid(row=13, column=0, columnspan=2, sticky=tk.W, **padding)
+        ttk.Label(main_frame, textvariable=self.status_var).grid(row=13, column=0, columnspan=3, sticky=tk.EW, **padding)
 
         # Control buttons
         control_frame = ttk.Frame(main_frame)
-        control_frame.grid(row=14, column=0, columnspan=3, sticky=tk.E, **padding)
+        control_frame.grid(row=14, column=0, columnspan=3, sticky=tk.EW, **padding)
         ttk.Button(control_frame, text="Start VM", command=self.start_vm).grid(row=0, column=0, padx=5)
         ttk.Button(control_frame, text="Stop VM", command=self.stop_vm).grid(row=0, column=1, padx=5)
 
         main_frame.columnconfigure(1, weight=1)
+        main_frame.rowconfigure(15, weight=1)
 
     def _populate_defaults(self) -> None:
         default_binary = os.environ.get(

@@ -4,7 +4,8 @@ This directory is reserved for launch helpers and self-contained binaries built 
 
 * `launch.sh` – Bash wrapper that starts the Tkinter-based GUI VM manager.  The script replaces the previously distributed AppImage
   and simply proxies through to ``tools/gui_vm_manager.py`` so contributors can launch the manager without rebuilding an AppImage.
-  It respects the same ``$BEMU_BINARY`` and command-line overrides exposed by the Python entry point.
+  It respects the same ``$BEMU_BINARY`` and command-line overrides exposed by the Python entry point.  The GUI supports full
+  resizing, so path fields automatically expand when you maximize the window.
 * `BEMU_VM_Manager-x86_64.AppImage` – Optional AppImage for the GUI VM manager.  The binary is no longer checked into the
   repository so contributors can send pull requests without tripping binary-upload restrictions, but locally-built copies may still
   be placed here if you prefer the AppImage packaging.  The bundle includes shortcuts for the virtual-display-rs driver, Virtual

@@ -35,6 +35,11 @@ The window exposes the following inputs:
 * **Machine** – the machine type passed to ``-machine`` (defaults to ``q35``).
 * **SeaBIOS firmware** – optional BIOS passed through ``-bios``.
 
+The interface now allows free resizing, including maximizing the window.  The
+fields expand horizontally so wider layouts expose more of each path without
+requiring horizontal scrolling, and additional vertical space is absorbed by
+the status area to keep the controls readable on large displays.
+
 SeaBIOS integration
 -------------------
 
